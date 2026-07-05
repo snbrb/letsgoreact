@@ -1,7 +1,7 @@
 import FilterButton from "../../components/buttons/FilterButton";
 import Summary from "../../components/text/Summary";
-import type { Task } from "./TasksList";
-import { TaskStatus } from "./TasksList";
+import type { Task } from "./taskTypes";
+import { TaskStatus } from "./taskTypes";
 
 
 // The Tasks component is responsible for displaying a list of tasks along 

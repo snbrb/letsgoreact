@@ -1,7 +1,7 @@
 // Sample tasks array for demonstration purposes
 
-import type { Task, } from "./TasksList";
-import { TaskStatus } from "./TasksList";
+import type { Task, } from "./taskTypes";
+import { TaskStatus } from "./taskTypes";
 
 
 // This array contains sample tasks with their respective IDs, titles, and statuses.
