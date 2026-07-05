@@ -1,19 +1,16 @@
+import { useState } from "react";
 import FilterButton from "../../components/buttons/FilterButton";
 import Summary from "../../components/text/Summary";
 import type { Task } from "./taskTypes";
 import { TaskStatus } from "./taskTypes";
+import { tasks as sampleTasks } from "./TaskData";
 
 
 // The Tasks component is responsible for displaying a list of tasks along 
 // with filtering options and a summary of the tasks.
 function TaskList() {
     // Sample tasks array for demonstration purposes
-    const tasks: Task[] = [
-        { id: 1, title: "This is Task 1", status: TaskStatus.COMPLETED },
-        { id: 2, title: "This is Task 2", status: TaskStatus.COMPLETED },
-        { id: 3, title: "This is Task 3", status: TaskStatus.PENDING }
-    ];
-
+    const [tasks, setTasks] = useState<Task[]>(sampleTasks);
 
     return (
         <div>
