@@ -1,17 +1,7 @@
 import FilterButton from "../../components/buttons/FilterButton";
 import Summary from "../../components/text/Summary";
-
-interface Task {
-    id: number;
-    title: string;
-    status: TaskStatus;
-}
-
-// Enum to represent the status of a task, either PENDING or COMPLETED.
-enum TaskStatus {
-    PENDING,
-    COMPLETED,
-}
+import type { Task } from "./TasksList";
+import { TaskStatus } from "./TasksList";
 
 
 // The Tasks component is responsible for displaying a list of tasks along 
@@ -41,8 +31,8 @@ function TaskList() {
             <hr />
 
             <ul>
-                {tasks.map((task, index) => (
-                    <li key={index}>
+                {tasks.map((task) => (
+                    <li key={task.id}>
                         <span>{task.title}</span><br />
                         <span>{task.status === TaskStatus.COMPLETED ? "Completed" : "Pending"}</span>
                         <br /><br />
