@@ -8,9 +8,8 @@
 import './App.css'
 import Header from './layout/Header'
 import Footer from './layout/Footer'
-import AddTask from './features/add_tasks/add_task'
-import Tasks from './features/view_tasks/tasks'
-
+import AddTask from './features/add_tasks/AddTask'
+import TaskList from './features/view_tasks/TaskList'
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -18,7 +17,7 @@ function App() {
     <>
       <Header />
       <AddTask />
-      <Tasks />
+      <TaskList />
 
       <Footer />
 

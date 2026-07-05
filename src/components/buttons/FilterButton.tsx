@@ -1,5 +1,6 @@
 
 // FilterButton.tsx
+
 // This interface defines the expected props for the FilterButton component.
 interface FilterButtonProps {
     onClick: () => void;
@@ -11,8 +12,6 @@ interface FilterButtonProps {
 // It takes two props: onClick, which is a function that will be called when the 
 // button is clicked, and label, which is a string that will be displayed 
 // inside the button.
-
-
 function FilterButton({ onClick, label }: FilterButtonProps) {
     return (
         <button className="filter-button" onClick={onClick}>
@@ -21,4 +20,6 @@ function FilterButton({ onClick, label }: FilterButtonProps) {
     );
 }
 
+
+// Exporting the FilterButton component as the default export of this module.
 export default FilterButton;
