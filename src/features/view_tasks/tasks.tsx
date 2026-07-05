@@ -1,12 +1,18 @@
 import FilterButton from "../../components/buttons/FilterButton";
+import Summary from "../../components/text/Summary";
 
 function Tasks() {
+    // Sample tasks array for demonstration purposes
+    const tasks: string[] = ["This is Task 1", "This is Task 2", "This isTask 3"];
+
+
     return (
         <div>
             <h1>Tasks</h1>
-            <p>This is the tasks page.</p>
+            <Summary title="Task Summary" content="3 total tasks" />
 
             <hr />
+
             <ul className="task-filters">
                 <li><FilterButton label="All" onClick={() => { }} /></li>
                 <li><FilterButton label="Completed" onClick={() => { }} /></li>
@@ -16,9 +22,9 @@ function Tasks() {
             <hr />
 
             <ul>
-                <li>Task 1</li>
-                <li>Task 2</li>
-                <li>Task 3</li>
+                {tasks.map((task, index) => (
+                    <li key={index}>{task}</li>
+                ))}
             </ul>
         </div>
     );

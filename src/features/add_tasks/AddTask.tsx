@@ -1,3 +1,5 @@
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+
 export default function AddTask() {
     return (
         <div>
@@ -6,7 +8,9 @@ export default function AddTask() {
             <form>
                 <label htmlFor="taskName">Task Name:</label>
                 <input type="text" id="taskName" name="taskName" />
-                <button type="submit">Add Task</button>
+                <PrimaryButton onClick={() => { /* Handle add task logic here */ }}>
+                    Add Task
+                </PrimaryButton>
             </form>
         </div>
     );
