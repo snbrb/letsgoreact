@@ -4,16 +4,23 @@
 // both in development and after building for production.
 
 
-import heroImg from './assets/hero.png'
+//import heroImg from './assets/hero.png'
 import './App.css'
+import Header from './layout/Header'
+import Footer from './layout/Footer'
+import AddTask from './features/add_tasks/add_task'
+import Tasks from './features/view_tasks/tasks'
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>Lets Go React</h1>
-      <img src={heroImg} alt="Hero Image" width="200" />
+      <Header />
+      <AddTask />
+      <Tasks />
+
+      <Footer />
 
     </>
   )
