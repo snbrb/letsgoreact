@@ -14,34 +14,6 @@ function TaskList() {
     const [filter, setFilter] = useState<"ALL" | "COMPLETED" | "PENDING">("ALL");
 
 
-    // This effect runs whenever the filter state changes.
-    // useEffect is a React hook that allows you to perform side effects in function components.
-    // what is side effect? 
-    // A side effect is any operation that affects something outside the scope of the function being executed. 
-    // scope of function mean the function which is creating this component.
-    // In React, side effects can include things like data fetching, subscriptions, 
-    // or manually changing the DOM. 
-    // The useEffect hook allows you to perform these side effects in a way that is
-    //  consistent with React's rendering behavior.
-    useEffect(() => {
-        // This effect runs whenever the filter state changes.
-        // It filters the tasks based on the selected filter and updates the tasks state.
-
-        // update the tasks state based on the selected filter.
-        switch (filter) {
-            case "COMPLETED":
-                setTasks(sampleTasks.filter((task) => task.status === TaskStatus.COMPLETED));
-                break;
-            case "PENDING":
-                setTasks(sampleTasks.filter((task) => task.status === TaskStatus.PENDING));
-                break;
-            default:
-                setTasks(sampleTasks);
-        }
-
-
-    }, [filter]);
-
 
     function handleFilterChange(newFilter: "ALL" | "COMPLETED" | "PENDING") {
         // This function updates the filter state based on the selected filter.
@@ -56,12 +28,24 @@ function TaskList() {
                 task.id === taskId ? { ...task, status: TaskStatus.COMPLETED } : task
             )
         );
+
     }
+
+    // Filter the tasks based on the selected filter before rendering them.
+    const visibleTasks: Task[] = tasks.filter((task) => {
+        if (filter === "COMPLETED") return task.status === TaskStatus.COMPLETED;
+        if (filter === "PENDING") return task.status === TaskStatus.PENDING;
+        return true; // For "ALL" filter
+    });
+
+
+    const totalTasks = visibleTasks.length;
+
 
     return (
         <div>
             <h1>Tasks</h1>
-            <Summary title="Task Summary" content={`${tasks.length} total tasks`} />
+            <Summary title="Task Summary" content={`${totalTasks} total tasks`} />
 
             <hr />
 
@@ -74,7 +58,7 @@ function TaskList() {
             <hr />
 
             <ul>
-                {tasks.map((task) => (
+                {visibleTasks.map((task) => (
                     <li key={task.id}>
                         <span>{task.title}</span><br />
                         <span>{task.status === TaskStatus.COMPLETED ? "Completed" : "Pending"}</span><br />
