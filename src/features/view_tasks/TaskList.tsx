@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilterButton from "../../components/buttons/FilterButton";
 import Summary from "../../components/text/Summary";
 import type { Task } from "./taskTypes";
 import { TaskStatus } from "./taskTypes";
 import { tasks as sampleTasks } from "./TaskData";
+import TaskItem from "./TaskItem";
 
 
 // The Tasks component is responsible for displaying a list of tasks along 
@@ -22,7 +23,6 @@ function TaskList() {
 
     // This function updates the status of a task to COMPLETED based on its ID.
     function markTaskAsCompleted(taskId: number) {
-        // This function updates the status of a task to COMPLETED based on its ID.
         setTasks((prevTasks) =>
             prevTasks.map((task) =>
                 task.id === taskId ? { ...task, status: TaskStatus.COMPLETED } : task
@@ -40,7 +40,18 @@ function TaskList() {
 
 
     const totalTasks = visibleTasks.length;
-
+    let content;
+    if (totalTasks === 0) {
+        content = <p>No tasks to display.</p>;
+    } else {
+        content = (
+            <ul>
+                {visibleTasks.map((task) => (
+                    <TaskItem key={task.id} task={task} markTaskAsCompleted={markTaskAsCompleted} />
+                ))}
+            </ul>
+        );
+    }
 
     return (
         <div>
@@ -56,20 +67,7 @@ function TaskList() {
             </ul>
 
             <hr />
-
-            <ul>
-                {visibleTasks.map((task) => (
-                    <li key={task.id}>
-                        <span>{task.title}</span><br />
-                        <span>{task.status === TaskStatus.COMPLETED ? "Completed" : "Pending"}</span><br />
-                        {task.status === TaskStatus.PENDING && (
-                            <button onClick={() => markTaskAsCompleted(task.id)}>Mark as Completed</button>
-                        )}<br />
-                        <br /><br />
-                    </li>
-                ))}
-
-            </ul>
+            {content}
         </div>
     );
 
