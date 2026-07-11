@@ -3,32 +3,29 @@ import FilterButton from "../../components/buttons/FilterButton";
 import Summary from "../../components/text/Summary";
 import type { Task } from "./taskTypes";
 import { TaskStatus } from "./taskTypes";
-import { tasks as sampleTasks } from "./TaskData";
 import TaskItem from "./TaskItem";
+interface TaskListProps {
+    tasks: Task[];
+    onUpdateTaskStatus: (taskId: number, newStatus: TaskStatus) => void;
+    onDeleteTask: (taskId: number) => void;
+}
 
 
 // The Tasks component is responsible for displaying a list of tasks along 
 // with filtering options and a summary of the tasks.
-function TaskList() {
+function TaskList({ tasks, onUpdateTaskStatus, onDeleteTask }: TaskListProps) {
     // Sample tasks array for demonstration purposes
-    const [tasks, setTasks] = useState<Task[]>(sampleTasks);
+
     const [filter, setFilter] = useState<"ALL" | "COMPLETED" | "PENDING">("ALL");
 
-
-
+    // This function updates the filter state based on the selected filter.
     function handleFilterChange(newFilter: "ALL" | "COMPLETED" | "PENDING") {
-        // This function updates the filter state based on the selected filter.
         setFilter(newFilter);
     }
 
     // This function updates the status of a task to COMPLETED based on its ID.
     function markTaskAsCompleted(taskId: number) {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === taskId ? { ...task, status: TaskStatus.COMPLETED } : task
-            )
-        );
-
+        onUpdateTaskStatus(taskId, TaskStatus.COMPLETED);
     }
 
     // Filter the tasks based on the selected filter before rendering them.
@@ -47,7 +44,7 @@ function TaskList() {
         content = (
             <ul>
                 {visibleTasks.map((task) => (
-                    <TaskItem key={task.id} task={task} markTaskAsCompleted={markTaskAsCompleted} />
+                    <TaskItem key={task.id} task={task} markTaskAsCompleted={markTaskAsCompleted} onDeleteTask={onDeleteTask} />
                 ))}
             </ul>
         );

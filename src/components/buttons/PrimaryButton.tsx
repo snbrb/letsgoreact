@@ -7,8 +7,9 @@ import React from 'react';
 // children is a ReactNode, which means it can be any valid React child (string, number, element, etc.)
 // that will be displayed inside the button.
 interface Props {
-    onClick: () => void;
+    onClick?: () => void;
     children: React.ReactNode;
+    buttonType?: "button" | "submit" | "reset"; // Optional prop to specify the button type
 }
 
 export default function PrimaryButton(props: Props) {
@@ -20,6 +21,7 @@ export default function PrimaryButton(props: Props) {
     // The button element is styled with Tailwind CSS classes to give it a primary button appearance.
     return (
         <button
+            type={props.buttonType || "button"} // Default to "button" if buttonType is not provided
             onClick={onClick}
             className="primary-button"
         >
